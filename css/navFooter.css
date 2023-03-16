@@ -1,54 +1,59 @@
-* , *:before, *:after{
+:root {
+    --color-bleu: #8ECAE6;
+    --color-bleu2: #219EBC;
+    --color-black-Bleu: #023047;
+    --color-yellow: #FFB703;
+    --color-orange: #FB8500;
+}
+
+* , *::before, *::after{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     cursor: default;
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 /*** nav barre ***/
 nav {
     width: 100%;
+    height: 60px;
     display: flex;
+    justify-content: center;
     align-items: center;
-    padding: 15px;
-    background: #000;
-    border-bottom: 1px solid #c5c5c6;
+    background: var(--color-black-Bleu);
+    border-bottom: 2px solid var(--color-bleu);
 }
-
 .hamburger {display: none;}
 
 .navlinks-container a {
-    margin: 0 3rem;
-    font-size: max(1.2vw, 20px);
+    margin: auto;
+    font-size: 25px;
     text-decoration: none;
-    color: #c99d3e;
-    display: inline-block;
+    color: var(--color-orange);
+    margin-top: 10px;
+}
+.navlinks-container a:hover {
+    color: var(--color-bleu);
+    cursor: pointer;
 }
 .navlinks-container {
-    margin-left: 70px; 
-    margin-bottom: -5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
 }
-
-.navlinks-container a::after { /*Animation en-dessous des links*/
-    content: "";
-    display: block;
-    position: absolute;
-    bottom: -3px;
-    width: 100%;
-    height: 1px;
-    transform: scaleX(0);
-    transform-origin: left;
-    background: #c5c5c6;
-    transition: transform 0.3s ease-out;
-}
-.navlinks-container a:hover::after {transform: scaleX(1)}
 .navlinks-container a:hover {cursor: pointer;}
-nav a :hover {cursor: pointer;}
 
 @media (max-width: 900px) {
 nav {position: relative;}
 .navlinks-container {margin-left: 0px; margin-bottom: -5px;}
-
 /* Hamburger */
 .hamburger {
     width: 20px;
@@ -56,7 +61,7 @@ nav {position: relative;}
     cursor: pointer;
     border: none;
     display: flex;
-    background: #000;
+    background: var(--color-black-Bleu);
     align-items: center;
     position: relative;
 }
@@ -64,10 +69,15 @@ nav {position: relative;}
     display: block;
     width: 100%;
     height: 2px;
-    background: #c5c5c6;
+    background: var(--color-bleu2);
     position: absolute;
     pointer-events: none;
     transition: opacity 0.3s 0.15s ease-out;
+    margin-left: 10px;
+    margin-top: 25px;
+}
+.hamburger span:hover {
+    cursor: pointer;
 }
 .hamburger span:nth-child(1),
 .hamburger span:nth-child(3) {
@@ -78,42 +88,36 @@ nav {position: relative;}
     transform: translateY(-7px);
 }
 .hamburger.open span:nth-child(1) {transform: translate(0) rotate(135deg);}
-
 .hamburger.open span:nth-child(2) {
     opacity: 0;
     transition: opacity 0s ease-out;
 }
 .hamburger.open span:nth-child(3) {transform: translate(0) rotate(-135deg);}
-
 .navlinks-container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     position: absolute;
-    background: #000;
+    background: var(--color-black-Bleu);
     top: 100%;
     left: 0;
-    height: 100vh;
+    height: 15rem;
     padding: 15px 50px 15px 20px;
-    border-right: 1px solid #c5c5c6;
-    border-bottom: 1px solid #c5c5c6;
+    border-right: 2px solid var(--color-bleu2);
+    border-bottom: 2px solid var(--color-bleu2);
     transform: translate(-100%);
 }
 .open {transform: translate(0%);}
-
-.navlinks-container a {
-    font-size: 18px;
-    margin: 10px 0
-}
+.navlinks-container a {font-size: 20px;}
 }
 
 /*** Footer ***/
 footer {
     margin-top: 10%;
-    border-top: 1px solid #c5c5c6;
+    border-top: 2px solid var(--color-bleu2);
     width: 100%;
-    background: #000;
-    color: #c99d3e;
+    background: var(--color-black-Bleu);
+    color: var(--color-orange);
 }
 
 .content-footer {
@@ -132,20 +136,26 @@ footer {
 .footer-services h3,
 .footer-schedule h3,
 .footer-medias h3 {
-    font-size: max(2vw, 30px);
+    font-size: max(1.5vw, 25px);
     padding-bottom: 20px;
     white-space: pre;
     margin-left: 100px;
 }
 
-.footer-contact p,
+.footer-contact a,
 .footer-services li,
 .footer-schedule li,
 .footer-medias li {
-    font-size: max(1vw, 20px);
+    font-size: max(1vw, 15px);
     padding: 10px 0;
     margin-left: 100px;
 }
+
+.footer-contact a {
+    text-decoration: none;
+    color: var(--color-orange);
+}
+.footer-contact a:hover {cursor: pointer;}
 
 /* Services */
 .services-list,
@@ -154,41 +164,38 @@ footer {
 
 .services-list a {
     text-decoration: none;
-    color: #c99d3e;
+    color: var(--color-orange);
 }
 
 /* Medias */
-.media-list svg {
-    width: 35px;
+.media-list img {
+    width: 90px;
     margin: 10px 10px;
 }
 
 .media-list a {
     text-decoration: none;
-    color: #c99d3e;
+    color: var(--color-orange);
     display: flex;
     align-items: center;
-    font-size: max(1vw, 20px);
+    font-size: max(1vw, 15px);
     margin-left: 6vw;
 }
 
 .media-list li :hover{
-    color: #c5c5c6;
+    color: var(--color-bleu);
     cursor: pointer;
 }
 
-/* Mention Légal */
-.mentionLegal {margin-bottom: 2%;}
-
 .mentionLegal a {
-    color: #c99d3e;
+    color: var(--color-orange);
     text-decoration: none;
-    font-size: max(1vw, 20px);
+    font-size: max(1vw, 15px);
 }
 
 .mentionLegal a:hover {
     cursor: pointer;
-    color: #c5c5c6;
+    color: var(--color-bleu);
 }
 
 /* Media Footer */
@@ -210,29 +217,7 @@ footer {
 .footer-medias a,
 .footer-schedule li,
 .footer-contact p,
-.mentionLegal a {font-size: max(2vw, 20px);}
+.mentionLegal a {font-size: max(1.5vw, 15px);}
 .footer-medias svg {width: 30px;}
-}
-
-@media screen and (max-width: 900px) {
-.footer-contact h3,
-.footer-services h3,
-.footer-schedule h3,
-.footer-medias h3 {margin-left: 90px;}
-.footer-contact p,
-.footer-services li,
-.footer-schedule li,
-.footer-medias li {margin-left: 90px;}
-}
-
-@media screen and (max-width: 900px) {
-.footer-contact h3,
-.footer-services h3,
-.footer-schedule h3,
-.footer-medias h3 {margin-left: 40px;}
-.footer-contact p,
-.footer-services li,
-.footer-schedule li,
-.footer-medias li {margin-left: 40px;}
 }
     
