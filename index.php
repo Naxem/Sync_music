@@ -14,9 +14,7 @@
     <!--CSS-->
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/navFooter.css">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-
     <title>Sync Music</title>
 </head>
 <nav>        
@@ -27,20 +25,20 @@
                 <span></span>
         </button>
         <div class="navlinks-container">
-            <a href="index" aria-current="page">Accueil</a>
+            <a href="index" aria-current="main">Accueil</a>
             <?php
             if(empty($_SESSION["id"])) {
             ?>
-            <a href="php/login" aria-current="Galerie">Conexion</a>
+            <a href="php/login" aria-current="conexion">Conexion</a>
             <?php
             } else {
             ?>
-            <a href="php/deconexion" aria-current="Galerie">deconexion</a>
-            <a href="php/admin" aria-current="Galerie">profile</a>
+            <a href="php/deconexion" aria-current="deconexion">deconexion</a>
+            <a href="php/<?= $_SESSION["role"] ?>" aria-current="profile">profile</a>
             <?php
             }
             ?>
-            <a href="page/contact">Contact</a>
+            <a href="page/contact" aria-current="Contact">Contact</a>
         </div>
     </div>
     <!--JS-->
@@ -139,5 +137,5 @@
                 <a href="mentionLegal.html">Mentions légales</a>
             </center>
         </div>
-    </footer>
+</footer>
 </html>

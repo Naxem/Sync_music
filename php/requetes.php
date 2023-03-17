@@ -2,21 +2,36 @@
   require("conexion_bdd.php");
   session_start();
   $_SESSION["date"] = date("Y-m-d");
-  $_SESSION["reussi"] = false;
-  $_SESSION["status_uploade"] = "";
+  date_default_timezone_set('Europe/Paris');// Définit le fuseau horaire à Paris
+  $_SESSION["heure"] = date('H:i:s');
 
   if(isset($_POST["btn-addPlaylist"])) {
     $labelle = $_POST["txt-nom"];
-    create_playlist($labelle);
-    header("Location: admin.php");
+    if((empty($labelle)) || ($labelle === "")) {
+      $_SESSION["status_uploade"] = "Nom de la playliste vide";
+      $_SESSION["reussi"] = false;
+      header("Location: admin");
+    } else {
+      create_playlist($labelle);
+      $_SESSION["status_uploade"] = "Nom de la playliste Valide";
+      $_SESSION["reussi"] = true;
+      header("Location: admin");
+    }
   }
 
   if (isset($_POST['btn-addMusic'])) {
     uploadFichier($_POST["s_playlist"]);
-    header("location: admin.php");
+    header("Location: admin");
   }
 
   //return
+  function return_id_role($login) {
+    $pdo = connexion_bdd();
+    $stmt = $pdo ->prepare("select role from users where Login = ?;");
+    $stmt->execute(array($login));
+    return $stmt;
+  }
+
   function return_playlist_by_id() {
     $pdo = connexion_bdd();
     $sql="select Labelle from playlist
@@ -48,7 +63,7 @@
   function return_count_music($labelle) {
     $pdo = connexion_bdd();
     $sql="select count(Labelle) from music
-    where Labelle like '%?%';";
+    where Labelle LIKE CONCAT('%', ?, '%');";
     $stmt=$pdo->prepare($sql);
     $stmt->execute(array($labelle));
     return $stmt;
@@ -232,12 +247,12 @@
   }
 
   //logs
-  function log_conexion($label, $date, $user) {
+  function log_conexion($label, $date, $heure, $user, $idRole) {
     $pdo = connexion_bdd();
     $stmt = $pdo ->prepare("INSERT INTO logs
-    (Labelle, `Date`, `User`)
-    VALUES(?, ?, ?);");
-    $stmt->execute(array($label, $date, $user));
+    (Label, `Date`, Heure, User, `Role`)
+    VALUES(?, ?, ?, ?, ?);");
+    $stmt->execute(array($label, $date, $heure, $user, $idRole));
     return $stmt;
   }
 
