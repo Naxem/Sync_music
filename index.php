@@ -38,7 +38,7 @@
             <?php
             }
             ?>
-            <a href="page/contact" aria-current="Contact">Contact</a>
+            <a href="php/amis" aria-current="ajout d'amis">amis</a>
         </div>
     </div>
     <!--JS-->
@@ -50,12 +50,12 @@
             <a href="php/find_user">Trouver un utilisateur</a>
         </div>
         <div class="btn-search">
-            <a href="">Trouver une playliste</a>
+            <a href="php/find_playliste">Trouver une playliste</a>
         </div>
     </section>
 
     <section class="section-affPlayliste">
-        <h3>Liste des playlistes :</h3>
+        <h3>playlistes les plus écouter :</h3>
         <?php
         if(!empty($_SESSION["id"])) {
         $in_liste = array();
@@ -134,7 +134,7 @@
 
         <div class="mentionLegal">
             <center>
-                <a href="mentionLegal.html">Mentions légales</a>
+                <a href="mentionLegal">Mentions légales</a>
             </center>
         </div>
 </footer>

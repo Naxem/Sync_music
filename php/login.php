@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/login.css">
+    <link rel="stylesheet" href="../css/login.css">
     <title>Connexion</title>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
