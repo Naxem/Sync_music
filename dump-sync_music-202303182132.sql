@@ -41,7 +41,7 @@ CREATE TABLE `logs` (
 
 LOCK TABLES `logs` WRITE;
 /*!40000 ALTER TABLE `logs` DISABLE KEYS */;
-INSERT INTO `logs` VALUES ('Tentative de conexion de l\'utilisateur (Capchat non conforme)','2023-03-17','19:44:54',1,1),('Conexion de l\'utilisateur','2023-03-17','19:45:09',1,1),('Conexion de l\'utilisateur','2023-03-17','19:45:33',2,2),('Conexion de l\'utilisateur','2023-03-17','20:16:35',1,1),('Conexion de l\'utilisateur','2023-03-17','20:16:50',2,2);
+INSERT INTO `logs` VALUES ('Tentative de conexion de l\'utilisateur (Capchat non conforme)','2023-03-17','19:44:54',1,1),('Conexion de l\'utilisateur','2023-03-17','19:45:09',1,1),('Conexion de l\'utilisateur','2023-03-17','19:45:33',2,2),('Conexion de l\'utilisateur','2023-03-17','20:16:35',1,1),('Conexion de l\'utilisateur','2023-03-17','20:16:50',2,2),('Tentative de conexion de l\'utilisateur (Capchat non conforme)','2023-03-18','11:26:58',1,1),('Conexion de l\'utilisateur','2023-03-18','11:27:16',1,1),('Tentative de conexion de l\'utilisateur (Capchat non conforme)','2023-03-18','11:52:34',2,2),('Conexion de l\'utilisateur','2023-03-18','11:52:48',2,2),('Conexion de l\'utilisateur','2023-03-18','12:23:54',1,1),('Conexion de l\'utilisateur','2023-03-18','18:47:17',1,1),('Conexion de l\'utilisateur','2023-03-18','19:56:11',2,2);
 /*!40000 ALTER TABLE `logs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -81,6 +81,8 @@ CREATE TABLE `play` (
   `idMusic` int NOT NULL,
   `idPlaylist` int NOT NULL,
   `IdUser` int NOT NULL,
+  `heureDebut` time NOT NULL,
+  `timeCode` int NOT NULL,
   PRIMARY KEY (`IdUser`),
   KEY `play_FK` (`idMusic`),
   KEY `play_FK_1` (`idPlaylist`),
@@ -96,6 +98,7 @@ CREATE TABLE `play` (
 
 LOCK TABLES `play` WRITE;
 /*!40000 ALTER TABLE `play` DISABLE KEYS */;
+INSERT INTO `play` VALUES (1,1,1,'21:32:06',0);
 /*!40000 ALTER TABLE `play` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -223,4 +226,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-17 21:52:54
+-- Dump completed on 2023-03-18 21:32:40

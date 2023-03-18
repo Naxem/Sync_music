@@ -7,21 +7,26 @@ volumeRange = document.getElementById("inVol");
 audioPlayer.addEventListener('play', () => {
     intervalId = setInterval(updateTime, 1000);
 
+    if(btnPlay.hidden === true) {
+        btnPause.hidden = true
+        btnPlay.hidden = false
+    }
+
     const nomFichierComplet = audioPlayer.currentSrc;
     const nomFichier = nomFichierComplet.split('/').pop().replace(/%20/g, ' ');
     console.log(`La musique "${nomFichier}" a démarré.`);
 
     var value = nomFichier;
-        //alert(value);
+    var value2 = audioPlayer.currentTime;
         $.ajax({
             url: 'play_music.php',
             type: 'POST',
-            data: 'request=' + value,
+            data: { request: value, timeCode: value2 },
             beforeSend:function() {
                 //$(".list-pizza").html("<span> Chargement en cours... </span>");
                 console.log("In progress");
             },
-            success: function(data) {
+            success: function(/*data*/) {
                 //$(".list-pizza").html(data);
                 console.log("Fini");
             },
@@ -91,4 +96,20 @@ function spawnVolume() {
     } else {
         volumeRange.hidden = true
     }
+}
+
+function after() {
+    currentAudioIndex = currentAudioIndex - 2;
+    if(currentAudioIndex < 0) {
+        currentAudioIndex = audioFiles.length
+    }
+    if(audioPlayer.currentTime > 1) {
+        audioPlayer.currentTime = 0
+    } else {
+        audioPlayer.dispatchEvent(new Event('ended'));
+    }
+}
+
+function next() {
+    audioPlayer.dispatchEvent(new Event('ended'));
 }

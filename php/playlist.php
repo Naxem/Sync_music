@@ -1,5 +1,8 @@
 <?php
     require("requetes.php");
+    if((empty($_SESSION["id"])) || ($_SESSION["id"] == 0)) {
+        header("Location: php/login");
+    }
     $barre = $_GET["playlist"];
     $return_id_playlist = return_id_playlist($barre);
     $idPlaylist = $return_id_playlist->fetchAll();
@@ -69,20 +72,24 @@
                 const audioPlayer = document.getElementById("myAudio");
                 const audioFiles = <?php echo json_encode($audioFiles) ?>;
                 let currentAudioIndex = 0;
-                nameMusic.innerHTML = audioFiles[currentAudioIndex];
+                let maxMusic = audioFiles.length;
 
+                nameMusic.innerHTML = audioFiles[currentAudioIndex];
                 audioPlayer.addEventListener("ended", () => {
-                currentAudioIndex++;
-                    if (currentAudioIndex < audioFiles.length) {
+                    currentAudioIndex++;
+                    if(currentAudioIndex >= maxMusic) {
+                        currentAudioIndex = 0;
+                    }
+                    if (currentAudioIndex <= maxMusic) {
+                        audioPlayer.currentTime = 0;
                         audioPlayer.src = '../ressources/music/' + audioFiles[currentAudioIndex];
-                        //audioPlayer.play();
+                        audioPlayer.play();
                         nameMusic.innerHTML = audioFiles[currentAudioIndex];
                     }
                 });
-                audioPlayer.volume = 0.5;
+                audioPlayer.volume = 0.2;
                 audioPlayer.currentTime = 0;
                 audioPlayer.src = '../ressources/music/' + audioFiles[currentAudioIndex];
-                //audioPlayer.play();
             </script>
 
             <div id="div-timeRange">
@@ -173,7 +180,20 @@
                         }
                     });
                 </script>
+            </div>
 
+            <div id="div-precedent">
+                <svg onclick="after()" width="46" height="46" fill="none" stroke="#ffb703" stroke-linecap="round" 
+                stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" 
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="m11 17-5-5 5-5"></path><path d="m18 17-5-5 5-5"></path></svg>
+            </div>
+
+            <div id="div-suivant">
+                <svg onclick="next()" width="46" height="46" fill="none" stroke="#ffb703" 
+                stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="m13 17 5-5-5-5"></path><path d="m6 17 5-5-5-5"></path></svg>
             </div>
         </div>
     </section>

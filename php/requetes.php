@@ -185,15 +185,15 @@
   }
 
   //play & pause
-  function play_music($labelle) {
+  function play_music($labelle, $timecode) {
     $return_id_music = return_id_music($labelle);
     $id_music = $return_id_music->fetchAll();
     foreach($id_music as $res) {$idM = $res["idMusic"];}
     $pdo = connexion_bdd();
     $stmt = $pdo ->prepare("INSERT INTO play
-    (idMusic, idPlaylist, IdUser)
-    VALUES(?, ?, ?);");
-    $stmt->execute(array($idM, $_SESSION["id_playliste"], $_SESSION["id"]));
+    (idMusic, idPlaylist, IdUser, heureDebut, timeCode)
+    VALUES(?, ?, ?, ?, ?);");
+    $stmt->execute(array($idM, $_SESSION["id_playliste"], $_SESSION["id"], $_SESSION["heure"], $timecode));
   }
 
   function pause_music() {
@@ -201,6 +201,22 @@
     $stmt = $pdo ->prepare("DELETE FROM play
     WHERE IdUser = ?;");
     $stmt->execute(array($_SESSION["id"]));
+  }
+
+  function return_time_code($idU) {
+    $pdo = connexion_bdd();
+    $stmt = $pdo ->prepare("select timeCode from play
+    where IdUser = ?;");
+    $stmt->execute(array($idU));
+    return $stmt;
+  }
+
+  function return_idM($idU) {
+    $pdo = connexion_bdd();
+    $stmt = $pdo ->prepare("select idMusic from play
+    where IdUser = ?;");
+    $stmt->execute(array($idU));
+    return $stmt;
   }
 
   //Créa playliste

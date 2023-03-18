@@ -45,10 +45,13 @@
         $infos = $return_play_music->fetchAll();
         if(!empty($infos)) {
         foreach($infos as $res3) {
+            $return_name_music = return_name_music($res3["idMusic"]);
+            $nameMusic = $return_name_music->fetchAll();
+            foreach($nameMusic as $res4) {}
 ?>
         <div>
             <p class="nameUser"><?= $res["Login"] ?></p>
-            <a class="noneLecture" href="sync_music?idM=<?= $res3["idMusic"] ?>&idU=<?= $res["Login"] ?>&idP=<?= $res3["idPlaylist"] ?>"><?= $res3["idMusic"] ?></a>
+            <a class="noneLecture" href="sync_music?idU=<?= $res["Login"] ?>&idP=<?= $res3["idPlaylist"] ?>"><?= $res3["idMusic"] ?></a>
         </div>
 <?php
     }}else {
