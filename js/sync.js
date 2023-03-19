@@ -71,3 +71,17 @@ function after() {
 function next() {
     audioPlayer.dispatchEvent(new Event('ended'));
 }
+
+function differenceHeures(heure1, heure2) {
+    const [h1, m1, s1] = heure1.split(':');
+    const [h2, m2, s2] = heure2.split(':');
+    const date1 = new Date(0, 0, 0, h1, m1, s1);
+    const date2 = new Date(0, 0, 0, h2, m2, s2);
+    let diff = date2 - date1;
+    if (diff < 0) {
+      diff += 24 * 60 * 60 * 1000;
+    }
+    const heures = Math.floor(diff / 1000 / 60 / 60);
+    const minutes = Math.floor((diff / 1000 / 60) % 60);
+    return `${heures} heures et ${minutes} minutes`;
+  }

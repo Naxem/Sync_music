@@ -205,7 +205,7 @@
 
   function return_time_code($idU) {
     $pdo = connexion_bdd();
-    $stmt = $pdo ->prepare("select timeCode from play
+    $stmt = $pdo ->prepare("select timeCode, heureDebut from play
     where IdUser = ?;");
     $stmt->execute(array($idU));
     return $stmt;
@@ -275,7 +275,6 @@
   //création de compte
   function create_users($login, $mdp, $date, $role) {
     $pdo = connexion_bdd();
-    $login = filter_var($login, FILTER_SANITIZE_STRING);
     $role = filter_var($role, FILTER_SANITIZE_NUMBER_INT);
     $stmt = $pdo ->prepare("INSERT INTO users
     (Login, MDP, derniere, `role`)

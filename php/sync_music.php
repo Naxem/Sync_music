@@ -25,10 +25,13 @@
 
     $return_time_code = return_time_code($idU);
     $timeCode = $return_time_code->fetchAll();
-    foreach($timeCode as $res) {$timeMusic = $res["timeCode"];}
+    foreach($timeCode as $res) {
+        $timeMusic = $res["timeCode"];
+        $heureD = $res["heureDebut"];
+    }
 
     //Récupe les musiques dans la playliste est les met dans un array
-    $return_music_x_playlist = return_playlist_x_music($nameU);
+    $return_music_x_playlist = return_playlist_x_music($nameP);
     $list_music = $return_music_x_playlist->fetchAll();
     $audioFiles = array();
     foreach($list_music as $res) {
@@ -68,6 +71,7 @@
 <body>
     <p id="timeMusic" hidden><?= $timeMusic ?></p>
     <p id="nameM" hidden><?= $nameM ?></p>
+    <p id="heureD" hidden><?= $heureD ?></p>
     <section>
         <div>
             <p id="nameMusic">Erreur</p>
@@ -90,12 +94,13 @@
                 const nameMusic = document.getElementById("nameMusic");
                 const audioPlayer = document.getElementById("myAudio");
                 const nameM = document.getElementById("nameM");
+                const heureD = document.getElementById("heureD");
                 const timeMusic = document.getElementById("timeMusic");
                 const audioFiles = <?php echo json_encode($audioFiles) ?>;
                 let maxMusic = audioFiles.length;
                 let index = audioFiles.indexOf(nameM.textContent);
                 let currentAudioIndex = index;
-                console.log(nameM.textContent  + "ff"+ index)
+                let time_Code = 0
 
                 nameMusic.innerHTML = audioFiles[currentAudioIndex];
                 audioPlayer.addEventListener("ended", () => {
@@ -111,7 +116,18 @@
                     }
                 });
                 audioPlayer.volume = 0.2;
-                audioPlayer.currentTime = timeCodeSync.textContent;
+
+                let date = new Date();
+                let heure = date.getHours();
+                let minute = date.getMinutes();
+                let seconde = date.getSeconds();
+                const heure1 = heureD;
+                const heure2 = heure + ':' + minute + ':' + seconde;
+                const difference = differenceHeures(heure1, heure2);
+                console.log(difference);
+
+
+                audioPlayer.currentTime = time_Code;
                 audioPlayer.src = '../ressources/music/' + audioFiles[currentAudioIndex];
                 audioPlayer.play();
             </script>

@@ -51,7 +51,7 @@
 ?>
         <div>
             <p class="nameUser"><?= $res["Login"] ?></p>
-            <a class="noneLecture" href="sync_music?idU=<?= $res["Login"] ?>&idP=<?= $res3["idPlaylist"] ?>"><?= $res3["idMusic"] ?></a>
+            <a class="noneLecture" href="sync_music?idU=<?= $res["Login"] ?>&idP=<?= $res3["idPlaylist"] ?>"><?= $res4["Labelle"] ?></a>
         </div>
 <?php
     }}else {
