@@ -1,7 +1,7 @@
 <?php
     require("php/requetes.php");
     if((empty($_SESSION["id"])) || ($_SESSION["id"] == 0)) {
-        header("Location: php/login");
+        header("Location: php/login?conexion=1");
     }
 ?>
 

@@ -100,7 +100,8 @@
                 let maxMusic = audioFiles.length;
                 let index = audioFiles.indexOf(nameM.textContent);
                 let currentAudioIndex = index;
-                let time_Code = 0
+                let time_code = parseInt(timeMusic.textContent);
+                
 
                 nameMusic.innerHTML = audioFiles[currentAudioIndex];
                 audioPlayer.addEventListener("ended", () => {
@@ -121,15 +122,29 @@
                 let heure = date.getHours();
                 let minute = date.getMinutes();
                 let seconde = date.getSeconds();
-                const heure1 = heureD;
+
+                const heure1 = heureD.textContent;
                 const heure2 = heure + ':' + minute + ':' + seconde;
-                const difference = differenceHeures(heure1, heure2);
-                console.log(difference);
 
+                const temps1 = heure1.split(":");
+                const temps2 = heure2.split(":");
 
-                audioPlayer.currentTime = time_Code;
-                audioPlayer.src = '../ressources/music/' + audioFiles[currentAudioIndex];
-                audioPlayer.play();
+                const heures1 = parseInt(temps1[0]);
+                const minutes1 = parseInt(temps1[1]);
+                const secondes1 = parseInt(temps1[2]);
+
+                const heures2 = parseInt(temps2[0]);
+                const minutes2 = parseInt(temps2[1]);
+                const secondes2 = parseInt(temps2[2]);
+
+                const differenceEnSecondes = (heures2 - heures1) * 3600 + (minutes2 - minutes1) * 60 + (secondes2 - secondes1);
+
+                if (isFinite(differenceEnSecondes)) {
+                    audioPlayer.currentTime = differenceEnSecondes + time_code;
+                    console.log(time_code)
+                    audioPlayer.src = '../ressources/music/' + audioFiles[currentAudioIndex];
+                    audioPlayer.play();
+                }
             </script>
 
             <div id="div-timeRange">
