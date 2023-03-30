@@ -41,7 +41,7 @@ CREATE TABLE `logs` (
 
 LOCK TABLES `logs` WRITE;
 /*!40000 ALTER TABLE `logs` DISABLE KEYS */;
-INSERT INTO `logs` VALUES ('Tentative de conexion de l\'utilisateur (Capchat non conforme)','2023-03-17','19:44:54',1,1),('Conexion de l\'utilisateur','2023-03-17','19:45:09',1,1),('Conexion de l\'utilisateur','2023-03-17','19:45:33',2,2),('Conexion de l\'utilisateur','2023-03-17','20:16:35',1,1),('Conexion de l\'utilisateur','2023-03-17','20:16:50',2,2),('Tentative de conexion de l\'utilisateur (Capchat non conforme)','2023-03-18','11:26:58',1,1),('Conexion de l\'utilisateur','2023-03-18','11:27:16',1,1),('Tentative de conexion de l\'utilisateur (Capchat non conforme)','2023-03-18','11:52:34',2,2),('Conexion de l\'utilisateur','2023-03-18','11:52:48',2,2),('Conexion de l\'utilisateur','2023-03-18','12:23:54',1,1),('Conexion de l\'utilisateur','2023-03-18','18:47:17',1,1),('Conexion de l\'utilisateur','2023-03-18','19:56:11',2,2);
+INSERT INTO `logs` VALUES ('Tentative de conexion de l\'utilisateur (Capchat non conforme)','2023-03-17','19:44:54',1,1),('Conexion de l\'utilisateur','2023-03-17','19:45:09',1,1),('Conexion de l\'utilisateur','2023-03-17','19:45:33',2,2),('Conexion de l\'utilisateur','2023-03-17','20:16:35',1,1),('Conexion de l\'utilisateur','2023-03-17','20:16:50',2,2),('Tentative de conexion de l\'utilisateur (Capchat non conforme)','2023-03-18','11:26:58',1,1),('Conexion de l\'utilisateur','2023-03-18','11:27:16',1,1),('Tentative de conexion de l\'utilisateur (Capchat non conforme)','2023-03-18','11:52:34',2,2),('Conexion de l\'utilisateur','2023-03-18','11:52:48',2,2),('Conexion de l\'utilisateur','2023-03-18','12:23:54',1,1),('Conexion de l\'utilisateur','2023-03-18','18:47:17',1,1),('Conexion de l\'utilisateur','2023-03-18','19:56:11',2,2),('Conexion de l\'utilisateur','2023-03-20','13:39:27',1,1),('Tentative de conexion de l\'utilisateur (Capchat non conforme)','2023-03-30','08:58:24',1,1),('Tentative de conexion de l\'utilisateur','2023-03-30','08:58:48',1,1),('Conexion de l\'utilisateur','2023-03-30','08:59:16',1,1),('Conexion de l\'utilisateur','2023-03-30','08:59:57',2,2),('Conexion de l\'utilisateur','2023-03-30','09:18:45',2,2);
 /*!40000 ALTER TABLE `logs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,7 +98,7 @@ CREATE TABLE `play` (
 
 LOCK TABLES `play` WRITE;
 /*!40000 ALTER TABLE `play` DISABLE KEYS */;
-INSERT INTO `play` VALUES (1,1,1,'21:32:06',0);
+INSERT INTO `play` VALUES (1,1,2,'09:18:50',0);
 /*!40000 ALTER TABLE `play` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -196,7 +196,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`IdUser`),
   KEY `users_FK` (`role`),
   CONSTRAINT `users_FK` FOREIGN KEY (`role`) REFERENCES `role` (`idRole`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -205,7 +205,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'maxens','$argon2id$v=19$m=65536,t=4,p=1$am16MUJiV2I4eGpJUUlleg$NXHwGf0N+tCAmboy6wMtc6uf8C6f+A89JpDtDBazmWw','2023-02-21',1),(2,'florine','$argon2id$v=19$m=65536,t=4,p=1$am16MUJiV2I4eGpJUUlleg$NXHwGf0N+tCAmboy6wMtc6uf8C6f+A89JpDtDBazmWw','2023-02-24',2);
+INSERT INTO `users` VALUES (1,'maxens','$argon2id$v=19$m=65536,t=4,p=1$am16MUJiV2I4eGpJUUlleg$NXHwGf0N+tCAmboy6wMtc6uf8C6f+A89JpDtDBazmWw','2023-02-21',1),(2,'florine','$argon2id$v=19$m=65536,t=4,p=1$am16MUJiV2I4eGpJUUlleg$NXHwGf0N+tCAmboy6wMtc6uf8C6f+A89JpDtDBazmWw','2023-02-24',2),(3,'test','$argon2id$v=19$m=65536,t=4,p=1$am16MUJiV2I4eGpJUUlleg$NXHwGf0N+tCAmboy6wMtc6uf8C6f+A89JpDtDBazmWw','2023-02-24',3),(4,'test2','$argon2id$v=19$m=65536,t=4,p=1$am16MUJiV2I4eGpJUUlleg$NXHwGf0N+tCAmboy6wMtc6uf8C6f+A89JpDtDBazmWw','2023-02-24',3);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -226,4 +226,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-18 21:32:40
+-- Dump completed on 2023-03-30 11:16:15
