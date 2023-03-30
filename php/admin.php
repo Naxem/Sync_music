@@ -1,9 +1,26 @@
 <?php
     require("requetes.php");
-    if(empty($_SESSION["id"])) {
+    if((empty($_SESSION["id"])) || ($_SESSION["role"] != "admin") || (empty($_SESSION['role']))) {
         $_SESSION["status"] = "Vous n'etes pas autorize !";
         header("Location: login?conexion=1");
     }
+
+    if(empty($_SESSION["reussi"])) {
+        $_SESSION["reussi"] = false;
+    } else {
+        $_SESSION["reussi"] =  $_SESSION["reussi"];
+    }
+    if(empty($_SESSION["status_uploade"])) {
+        $_SESSION["status_uploade"] = "vide";
+    } else {
+        $_SESSION["status_uploade"] =  $_SESSION["status_uploade"];
+    }
+
+    $liste_users = return_users();
+    $users = $liste_users->fetchAll();
+
+    $liste_staff = return_staff();
+    $staff = $liste_staff->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -33,11 +50,13 @@
     <script src="js/navBare.js"></script>
 </nav>
 <body>
-    <?php if(($_SESSION["reussi"]) && (!empty($_SESSION["status_uploade"]))) { ?>
+    <?php if(($_SESSION["reussi"]) && ($_SESSION["status_uploade"] != "")) { ?>
         <div class="reussi"><?= $_SESSION["status_uploade"] ?></div>
-    <?php } else { ?>
+    <?php } elseif((!$_SESSION["reussi"]) && ($_SESSION["status_uploade"] == "")) { ?>
         <div class="erreur"><?= $_SESSION["status_uploade"] ?></div>
-    <?php }?>
+    <?php } else {?>
+        <div hidden class="erreur"><?= $_SESSION["status_uploade"] ?></div>
+    <?php } ?>
 
     <form class="form-addPlayliste" action="requetes.php" method="post">
         <p>Ajouter une playliste : </p>
@@ -60,6 +79,36 @@
         </select>
         <input type="submit" value="Ajouter" name="btn-addMusic" class="input-btnAdd">
     </form>
+
+    <section>
+        <div>
+            <h2>Liste des users :</h2>
+            <ul>
+                <li><p>Login</p><p>Dernière conexion</p></li>
+                <?php
+                foreach($users as $res) {
+                    $liU = $res['Login']; 
+                    $liD = $res['derniere'];
+                    echo "<li class='li-users'><p class='login'>".$liU."</p><p class='dateC'>".$liD."</p></li>";
+                }
+                ?>
+            </ul>
+        </div>
+
+        <div>
+        <h2>Liste Staff :</h2>
+        <ul>
+            <li><p>Login</p><p>Dernière conexion</p></li>
+            <?php
+            foreach($staff as $res) {
+                $liU = $res['Login']; 
+                $liD = $res['derniere'];
+                echo "<li class='li-users'><p class='login'>".$liU."</p><p class='dateC'>".$liD."</p></li>";
+            }
+            ?>
+        </ul>
+        </div>
+    </section>
 </body>
 <footer>
         <div class="content-footer">
@@ -115,6 +164,7 @@
         <div class="mentionLegal">
             <center>
                 <a href="../mentionLegal">Mentions légales</a>
+                <p>Tous droit réserver @Telle Maxens 2023</p>
             </center>
         </div>
 </footer>

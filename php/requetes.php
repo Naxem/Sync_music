@@ -52,6 +52,26 @@
     return $stmt;
   }
 
+  function return_users() {
+    $pdo = connexion_bdd();
+    $sql="SELECT Login, derniere FROM users
+    WHERE role NOT IN (1, 2)
+    ORDER BY Login ASC;";
+    $stmt=$pdo->prepare($sql);
+    $stmt->execute();
+    return $stmt;
+  }
+
+  function return_staff() {
+    $pdo = connexion_bdd();
+    $sql="SELECT Login, derniere FROM users
+    WHERE role != 3
+    ORDER BY Login ASC;";
+    $stmt=$pdo->prepare($sql);
+    $stmt->execute();
+    return $stmt;
+  }
+
   function return_playlist() {
     $pdo = connexion_bdd();
     $sql="select Labelle from playlist;";
